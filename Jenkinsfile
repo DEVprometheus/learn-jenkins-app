@@ -11,18 +11,17 @@ pipeline {
             }
             steps {
                 sh '''
-                    # Workspace'i tamamen temizle
-                    rm -rf node_modules package-lock.json
+                    # Alpine'a git kur
+                    apk add --no-cache git
                     
-                    # Checkout yap (container içinde)
-                    git clone https://github.com/DEVprometheus/learn-jenkins-app.git app
-                    cd app
+                    # Workspace'i temizle
+                    rm -rf node_modules
 
                     ls -la
                     node --version
                     npm --version
-                    npm install
-                    npm build
+                    npm ci
+                    npm run build
                     ls -la
                 '''
             }
