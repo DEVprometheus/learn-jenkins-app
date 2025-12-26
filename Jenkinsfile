@@ -11,10 +11,12 @@ pipeline {
             }
             steps {
                 sh '''
+                    # Eski node_modules varsa sil
+                    rm -rf node_modules package-lock.json
+                    
                     ls -la
                     node --version
                     npm --version
-                    npm install
                     npm ci
                     npm run build
                     ls -la
