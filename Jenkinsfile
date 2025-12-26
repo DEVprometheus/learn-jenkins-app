@@ -6,14 +6,10 @@ pipeline {
             agent {
                 docker {
                     image 'node:18-alpine'
-                    reuseNode true
                 }
             }
             steps {
                 sh '''
-                    # Eski node_modules varsa sil
-                    rm -rf node_modules
-
                     ls -la
                     node --version
                     npm --version
