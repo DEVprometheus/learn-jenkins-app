@@ -12,8 +12,8 @@ pipeline {
             steps {
                 sh '''
                     # Eski node_modules varsa sil
-                    rm -rf node_modules package-lock.json
-                    
+                    rm -rf node_modules
+
                     ls -la
                     node --version
                     npm --version
