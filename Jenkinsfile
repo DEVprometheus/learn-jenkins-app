@@ -6,23 +6,33 @@ pipeline {
             agent {
                 docker {
                     image 'node:18-alpine'
-                    args '-u root:root'
+                    reuseNode true
                 }
             }
             steps {
                 sh '''
-                    # Alpine'a git kur
-                    apk add --no-cache git
-                    
-                    # Workspace'i temizle
-                    rm -rf node_modules
-
                     ls -la
                     node --version
                     npm --version
                     npm ci
                     npm run build
                     ls -la
+                '''
+            }
+        }
+
+        stage('Test') {
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
+
+            steps {
+                sh '''
+                    test -f build/index.html
+                    npm test
                 '''
             }
         }
